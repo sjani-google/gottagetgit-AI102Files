@@ -7,16 +7,17 @@ import os
 import json
 
 
-def config():
-    print("Call Config")
-    return subscription_key, face_api_url
+# def config():
+#     print("Call Config")
+#     return subscription_key, face_api_url
 
-
-image_path = os.path.join(r'/Computer_Vision/Extract_facial_information_from_images/CapFrame.jpg')
+face_api_url = "https://cdn.profoto.com/cdn/053149e/contentassets/d39349344d004f9b8963df1551f24bf4/profoto-albert-watson-steve-jobs-pinned-image-original.jpg?width=1280&quality=75&format=jpg"
+image_path = os.path.join(r'CapFrame.jpg')
+print(image_path)
 image_data = open(image_path, "rb")
 
-subscription_key = "<enter your key>"
-face_api_url = "<place the API URL here>"
+endpoint = os.environ["FACEAPI_ENDPOINT"]
+subscription_key = os.environ["FACEAPI_KEY"]
 
 headers = {'Content-Type': 'application/octet-stream',
            'Ocp-Apim-Subscription-Key': subscription_key}

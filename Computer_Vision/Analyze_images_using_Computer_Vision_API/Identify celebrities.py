@@ -9,8 +9,8 @@ from PIL import Image
 import sys
 import time
 
-subscription_key = "<enter your key here>"
-endpoint = "<enter your endpoint URL here>"
+endpoint = os.environ["VISION_ENDPOINT"]
+subscription_key = os.environ["VISION_KEY"]
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
@@ -23,8 +23,7 @@ print("===== Detect Domain-specific Content - remote =====")
 remote_image_url_celebs = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files" \
                           "/master/ComputerVision/Images/faces.jpg "
 # Call API with content type (celebrities) and URL
-detect_domain_results_celebs_remote = computervision_client.analyze_image_by_domain("celebrities",
-                                                                                    remote_image_url_celebs)
+detect_domain_results_celebs_remote = computervision_client.analyze_image_by_domain("celebrities",remote_image_url_celebs)
 
 # Print detection results with name
 print("Celebrities in the remote image:")
@@ -40,7 +39,7 @@ This example detects celebrites and landmarks in local images.
 '''
 print("===== Detect Domain-specific Content - local =====")
 # Open local image file containing a celebritie
-local_image_path_celebrity = "Images/Faces.jpg"
+local_image_path_celebrity = "Images\\Faces.jpg"
 local_image_celebrity = open(local_image_path_celebrity, "rb")
 # Call API with the type of content (celebrities) and local image
 detect_domain_results_celebs_local = computervision_client.analyze_image_by_domain_in_stream("celebrities",

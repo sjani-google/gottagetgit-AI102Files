@@ -9,12 +9,12 @@ from PIL import Image
 import sys
 import time
 
-subscription_key = "<enter your key here>"
-endpoint = "<enter your endpoint URL here>"
+endpoint = os.environ["VISION_ENDPOINT"]
+subscription_key = os.environ["VISION_KEY"]
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
-remote_image_url = "<your image url>"
+remote_image_url = "https://m.media-amazon.com/images/I/61tLQe94e4L.jpg"
 
 '''
 Detect Adult or Racy Content - remote
@@ -40,7 +40,7 @@ The score is ranged 0.0 - 1.0 with smaller numbers indicating negative results.
 print()
 print("===== Detect Adult or Racy Content - local =====")
 # Open local file
-local_image_path = "<folder\\image.jpg>"
+local_image_path = "images\\faces.jpg"
 local_image = open(local_image_path, "rb")
 # Select visual features you want
 local_image_features = ["adult"]

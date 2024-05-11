@@ -9,8 +9,8 @@ from PIL import Image
 import sys
 import time
 
-subscription_key = "<enter your key here>"
-endpoint = "<enter your endpoint URL here>"
+endpoint = os.environ["VISION_ENDPOINT"]
+subscription_key = os.environ["VISION_KEY"]
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
@@ -20,8 +20,7 @@ This example will extract handwritten text in an image, then print results, line
 '''
 print("===== Batch Read File - remote =====")
 # Get an image with handwritten text
-remote_image_handw_text_url = "https://raw.githubusercontent.com/MicrosoftDocs/azure-docs/master/articles/cognitive" \
-                              "-services/Computer-vision/Images/readsample.jpg "
+remote_image_handw_text_url = "https://ocr-demo.abtosoftware.com/uploads/handwritten1.jpg "
 
 # Call API with URL and raw response (allows you to get the operation location)
 recognize_handw_results = computervision_client.read(remote_image_handw_text_url, raw=True)
@@ -42,6 +41,9 @@ while True:
 if get_handw_text_results.status == OperationStatusCodes.succeeded:
     for text_result in get_handw_text_results.analyze_result.read_results:
         for line in text_result.lines:
-            print(line.text)
-            print(line.bounding_box)
+            # print(line.text)
+            # print(line.bounding_box)
+            for word in line.words:
+                print(word)
+                # print(word.bounding_box)
 print()
